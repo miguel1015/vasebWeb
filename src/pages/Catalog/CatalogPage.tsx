@@ -58,10 +58,23 @@ export default function CatalogPage() {
           ))}
         </div>
 
+        {/* Result count */}
+        {filtered.length > 0 && (
+          <p className="mb-4 sm:mb-5 text-center text-xs sm:text-sm text-muted dark:text-gray-400">
+            {filtered.length} {filtered.length === 1 ? "producto encontrado" : "productos encontrados"}
+          </p>
+        )}
+
         {/* Product grid */}
         <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
-          {filtered.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {filtered.map((product, i) => (
+            <div
+              key={product.id}
+              className="animate-fade-up"
+              style={{ animationDelay: `${i * 80}ms` }}
+            >
+              <ProductCard product={product} />
+            </div>
           ))}
         </div>
 

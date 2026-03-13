@@ -12,7 +12,7 @@ export default function CategoriesSection() {
   };
 
   return (
-    <section ref={ref} className="bg-[#f2eeef] dark:bg-[#121212] py-4 sm:py-10 transition-colors duration-300">
+    <section ref={ref} className="bg-[#f2eeef] dark:bg-[#121212] py-1 sm:py-3 transition-colors duration-300">
       <div className="mx-auto max-w-7xl px-3 sm:px-6">
         <div className="flex flex-wrap justify-center gap-2.5 sm:gap-4 md:gap-6 lg:gap-10">
           {categories.map((category, i) => (

@@ -5,7 +5,7 @@ export default function HeroSection() {
     <section className="relative h-[280px] overflow-hidden xs:h-[340px] sm:h-[480px] lg:h-[600px]">
       {/* Background image */}
       <img
-        src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&q=80&fit=crop"
+        src="https://images.unsplash.com/photo-1693578616322-c8abe6c7393d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Sala de estar moderna con sofá elegante"
         className="absolute inset-0 h-full w-full object-cover animate-fade-in"
         style={{ animationDuration: "1.2s" }}

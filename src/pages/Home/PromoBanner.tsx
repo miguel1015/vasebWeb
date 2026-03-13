@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useInView } from "@/hooks/useInView";
 
 const slides = [
   [
@@ -52,7 +53,7 @@ const slides = [
     {
       id: 8,
       image:
-        "https://images.unsplash.com/photo-1507473885765-e6ed057ab6fe?w=600&h=450&fit=crop",
+        "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&h=450&fit=crop",
       label: "Lámpara de Pie",
     },
     {
@@ -70,6 +71,7 @@ export default function PromoBanner() {
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [isPaused, setIsPaused] = useState(false);
   const touchStart = useRef<number | null>(null);
+  const { ref: sectionRef, isVisible } = useInView(0.15);
 
   const total = slides.length;
 
@@ -118,39 +120,37 @@ export default function PromoBanner() {
   };
 
   return (
-    <section className="bg-[#f2eeef] py-10 sm:py-14 flex flex-col items-center justify-center">
-      <div className="mx-auto max-w-7xl w-full px-4 sm:px-6">
+    <section ref={sectionRef} className="bg-[#f2eeef] dark:bg-[#121212] py-4 sm:py-8 flex flex-col items-center justify-center transition-colors duration-300">
+      <div className="mx-auto max-w-7xl w-full px-3 sm:px-6">
         {/* Banner heading */}
         <div
-          className="relative mb-8 sm:mb-10 overflow-hidden rounded-xl px-5 py-8 sm:px-8 sm:py-10 text-center"
+          className={`relative mb-2 sm:mb-7 overflow-hidden rounded-lg sm:rounded-xl px-1 py-1 sm:px-3 sm:py-1 text-center ${isVisible ? "animate-fade-up" : "opacity-0"}`}
           style={{
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          <div className="absolute inset-0 bg-[#eae6e5]/70" />
-          <h2 className="relative z-10 text-xl font-bold text-gray-900 sm:text-2xl md:text-3xl">
-            Hasta <span className="text-2xl sm:text-3xl md:text-4xl">30%</span>{" "}
+          <div className="absolute inset-0 bg-[#eae6e5]/70 dark:bg-[#1e1e32]/80" />
+          <h2 className="relative z-10 text-base font-bold text-gray-900 dark:text-white sm:text-2xl md:text-3xl">
+            Hasta <span className="text-lg sm:text-3xl md:text-4xl">30%</span>{" "}
             de descuento en muebles de sala
           </h2>
         </div>
 
-        <div className="h-6 sm:h-10" />
-
         {/* Carousel */}
         <div
-          className="relative px-6 sm:px-0"
+          className={`relative px-6 sm:px-0 ${isVisible ? "animate-fade-up delay-200" : "opacity-0"}`}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {/* 3 cards row: 1 col mobile, 2 col tablet, 3 col desktop */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          {/* 1 col mobile, 2 col tablet, 3 col desktop */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4">
             {slides[current].map((item, i) => (
               <div
                 key={item.id}
-                className="group relative aspect-[4/3] overflow-hidden rounded-xl sm:rounded-2xl shadow-lg"
+                className="group relative aspect-video sm:aspect-4/3 overflow-hidden rounded-lg sm:rounded-2xl shadow-lg"
                 style={{
                   opacity: exiting ? 0 : 1,
                   transform: exiting
@@ -182,21 +182,21 @@ export default function PromoBanner() {
           {/* Arrows — inside on mobile, outside on desktop */}
           <button
             onClick={prev}
-            className="absolute left-0 sm:-left-4 lg:-left-5 top-1/2 z-20 -translate-y-1/2 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white shadow-lg text-gray-700 transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-110 hover:shadow-xl active:scale-95 cursor-pointer"
+            className="absolute left-0 sm:-left-4 lg:-left-5 top-1/2 z-20 -translate-y-1/2 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white dark:bg-[#2a2a42] shadow-lg text-gray-700 dark:text-gray-300 transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-110 hover:shadow-xl active:scale-95 cursor-pointer"
             aria-label="Anterior"
           >
             <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
           <button
             onClick={next}
-            className="absolute right-0 sm:-right-4 lg:-right-5 top-1/2 z-20 -translate-y-1/2 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white shadow-lg text-gray-700 transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-110 hover:shadow-xl active:scale-95 cursor-pointer"
+            className="absolute right-0 sm:-right-4 lg:-right-5 top-1/2 z-20 -translate-y-1/2 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white dark:bg-[#2a2a42] shadow-lg text-gray-700 dark:text-gray-300 transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-110 hover:shadow-xl active:scale-95 cursor-pointer"
             aria-label="Siguiente"
           >
             <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
 
           {/* Dots */}
-          <div className="mt-6 sm:mt-8 flex items-center justify-center gap-3">
+          <div className="mt-4 sm:mt-8 flex items-center justify-center gap-2.5 sm:gap-3">
             {slides.map((_, i) => {
               const isActive = i === current;
               return (
@@ -206,8 +206,8 @@ export default function PromoBanner() {
                   className="relative cursor-pointer group"
                   aria-label={`Slide ${i + 1}`}
                   style={{
-                    width: isActive ? 36 : 14,
-                    height: 14,
+                    width: isActive ? 28 : 10,
+                    height: 10,
                     borderRadius: 999,
                     padding: 3,
                     border: isActive
@@ -251,8 +251,6 @@ export default function PromoBanner() {
           100% { transform: scale(1); opacity: 0.5; }
         }
       `}</style>
-
-      <div className="h-12" />
     </section>
   );
 }

@@ -16,22 +16,22 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-primary text-white">
+    <footer className="relative overflow-hidden bg-primary dark:bg-[#0a0a18] text-white transition-colors duration-300">
       {/* Decorative gradient overlay */}
       <div className="absolute inset-0 bg-linear-to-br from-white/3 via-transparent to-gold/5" />
 
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Main footer content */}
-        <div className="grid grid-cols-1 gap-14 py-20 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-6 py-7 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand column */}
-          <div className="lg:col-span-1">
+          <div className="col-span-2 sm:col-span-1 lg:col-span-1">
             <h2 className="text-2xl font-bold tracking-wide">
               <span className="text-gold">VASEB</span>
             </h2>
-            <p className="mt-5 text-sm leading-loose text-white/60">
+            <p className="mt-3 text-sm leading-relaxed text-white/60">
               Tu destino para encontrar los mejores productos con la calidad y el estilo que mereces.
             </p>
-            <div className="mt-8 flex items-center gap-4">
+            <div className="mt-4 flex items-center gap-3">
               {socialLinks.map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
@@ -47,10 +47,10 @@ export default function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4 className="mb-6 text-sm font-semibold uppercase tracking-widest text-gold/80">
+            <h4 className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold/80">
               Enlaces rápidos
             </h4>
-            <ul className="space-y-4">
+            <ul className="space-y-2.5">
               {quickLinks.map(({ label, to }) => (
                 <li key={label}>
                   <Link
@@ -67,10 +67,10 @@ export default function Footer() {
 
           {/* Contact info */}
           <div>
-            <h4 className="mb-6 text-sm font-semibold uppercase tracking-widest text-gold/80">
+            <h4 className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold/80">
               Contacto
             </h4>
-            <ul className="space-y-5">
+            <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold/60" />
                 <div className="text-sm text-white/55">
@@ -100,10 +100,10 @@ export default function Footer() {
 
           {/* Hours */}
           <div>
-            <h4 className="mb-6 text-sm font-semibold uppercase tracking-widest text-gold/80">
+            <h4 className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold/80">
               Horarios
             </h4>
-            <ul className="space-y-5">
+            <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <Clock className="h-4 w-4 shrink-0 text-gold/60" />
                 <span className="text-sm text-white/55">Lunes a Sábado</span>
@@ -117,28 +117,28 @@ export default function Footer() {
                 </span>
               </li>
             </ul>
+          </div>
 
-            {/* Newsletter hint */}
-            <div className="mt-10">
-              <h4 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold/80">
-                Newsletter
-              </h4>
-              <div className="flex overflow-hidden rounded-lg border border-white/10">
-                <input
-                  type="email"
-                  placeholder="Tu email"
-                  className="w-full bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/30 outline-none transition-colors focus:bg-white/10"
-                />
-                <button className="shrink-0 bg-gold px-5 text-xs font-semibold uppercase tracking-wide text-primary transition-colors hover:bg-gold-dark">
-                  Enviar
-                </button>
-              </div>
+          {/* Newsletter */}
+          <div className="col-span-2 lg:col-span-4">
+            <h4 className="mb-2 text-sm font-semibold uppercase tracking-widest text-gold/80">
+              Newsletter
+            </h4>
+            <div className="flex max-w-sm overflow-hidden rounded-lg border border-white/10">
+              <input
+                type="email"
+                placeholder="Tu email"
+                className="w-full bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/30 outline-none transition-colors focus:bg-white/10"
+              />
+              <button className="shrink-0 bg-gold px-5 text-xs font-semibold uppercase tracking-wide text-primary transition-colors hover:bg-gold-dark">
+                Enviar
+              </button>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 py-8 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-2 border-t border-white/10 py-3 sm:flex-row">
           <p className="text-xs text-white/35">
             &copy; {new Date().getFullYear()} VASEB. Todos los derechos reservados.
           </p>

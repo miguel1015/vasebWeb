@@ -28,10 +28,10 @@ export default function CatalogPage() {
   }, [activeCategory]);
 
   return (
-    <section className="bg-white py-10 sm:py-14">
+    <section className="bg-white dark:bg-[#121212] py-10 sm:py-14 transition-colors duration-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionTitle className="mb-4">Catálogo</SectionTitle>
-        <p className="mb-8 sm:mb-10 text-center text-xs sm:text-sm text-muted">
+        <p className="mb-8 sm:mb-10 text-center text-xs sm:text-sm text-muted dark:text-gray-400">
           Explora toda nuestra colección de muebles y accesorios para el hogar.
         </p>
 
@@ -43,7 +43,7 @@ export default function CatalogPage() {
             className={`shrink-0 rounded-full border px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium transition-all ${
               activeCategory === "all"
                 ? "border-accent bg-accent text-white shadow-sm"
-                : "border-gray-300 bg-white text-gray-600 hover:border-accent hover:text-accent"
+                : "border-gray-300 bg-white text-gray-600 hover:border-accent hover:text-accent dark:border-white/10 dark:bg-[#1e1e32] dark:text-gray-300 dark:hover:border-accent dark:hover:text-accent"
             }`}
           >
             Todos
@@ -66,7 +66,7 @@ export default function CatalogPage() {
         </div>
 
         {filtered.length === 0 && (
-          <p className="mt-16 text-center text-muted">
+          <p className="mt-16 text-center text-muted dark:text-gray-400">
             No se encontraron productos en esta categoría.
           </p>
         )}

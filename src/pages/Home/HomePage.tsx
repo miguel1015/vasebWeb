@@ -7,11 +7,8 @@ export default function HomePage() {
   return (
     <div>
       <HeroSection />
-      <div className="h-16" />
       <CategoriesSection />
-      <div className="h-16" />
       <FeaturedSection />
-      <div className="h-16" />
       <PromoBanner />
     </div>
   );

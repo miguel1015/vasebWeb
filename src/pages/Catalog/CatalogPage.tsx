@@ -35,15 +35,15 @@ export default function CatalogPage() {
           Explora toda nuestra colección de muebles y accesorios para el hogar.
         </p>
 
-        {/* Category filters — scrollable on mobile */}
-        <div className="mb-8 sm:mb-10 flex gap-2 sm:gap-3 overflow-x-auto sm:overflow-visible sm:flex-wrap sm:justify-center pb-2 sm:pb-0 scrollbar-hide">
+        {/* Category filters — grid on mobile, flex-wrap on desktop */}
+        <div className="mb-8 sm:mb-10 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-3">
           <button
             type="button"
             onClick={() => handleCategoryClick("all")}
-            className={`shrink-0 rounded-full border px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium transition-all ${
+            className={`flex items-center justify-center px-3.5 py-3 sm:px-6 sm:py-3.5 md:h-17 md:w-40 font-sans text-sm sm:text-base md:text-lg font-medium tracking-wide transition-all ${
               activeCategory === "all"
-                ? "border-accent bg-accent text-white shadow-sm"
-                : "border-gray-300 bg-white text-gray-600 hover:border-accent hover:text-accent dark:border-white/10 dark:bg-[#1e1e32] dark:text-gray-300 dark:hover:border-accent dark:hover:text-accent"
+                ? "border-[#d4cdc4] bg-[#d9d4cf] text-black shadow-md dark:border-[#4a6fa5] dark:bg-[#4a6fa5]/20 dark:text-white"
+                : "border-[#e0d9d1] bg-[#e6e1dd] text-black shadow-sm hover:bg-[#d9d4cf] hover:shadow-md dark:border-white/10 dark:bg-[#1e1e32] dark:text-gray-200 dark:hover:bg-[#2a2a42] dark:hover:shadow-md"
             }`}
           >
             Todos

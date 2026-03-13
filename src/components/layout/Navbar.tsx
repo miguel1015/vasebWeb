@@ -30,18 +30,21 @@ export default function Navbar() {
   // Bounce cart icon when items change
   useEffect(() => {
     if (totalItems > prevTotal.current) {
-      setCartBounce(true);
-      const timer = setTimeout(() => setCartBounce(false), 500);
-      return () => clearTimeout(timer);
+      const timer = setTimeout(() => setCartBounce(true), 0);
+      const resetTimer = setTimeout(() => setCartBounce(false), 500);
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(resetTimer);
+      };
     }
     prevTotal.current = totalItems;
   }, [totalItems]);
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-gray-100/50 dark:border-white/10 shadow-sm transition-all duration-300 backdrop-blur-md ${
+      className={`sticky top-0 z-50 border-b border-white/10 shadow-sm transition-all duration-300 backdrop-blur-md ${
         hidden ? "-translate-y-full" : "translate-y-0"
-      } bg-white/80 dark:bg-[#1a1a2e]/80`}
+      } bg-black`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3 sm:py-2">
         {/* Logo */}
@@ -63,8 +66,8 @@ export default function Navbar() {
                   to={to}
                   className={`text-sm font-medium px-4 py-1.5 rounded-full transition-all duration-200 ${
                     isActive
-                      ? "bg-accent/10 text-accent dark:bg-accent/20"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 hover:text-accent"
+                      ? "bg-accent/20 text-accent"
+                      : "text-gray-300 hover:bg-white/10 hover:text-accent"
                   }`}
                 >
                   {label}
@@ -81,7 +84,7 @@ export default function Navbar() {
             <div
               className={`flex items-center overflow-hidden transition-all duration-300 rounded-full border ${
                 searchOpen
-                  ? "w-56 border-accent/30 bg-gray-50 dark:bg-white/5"
+                  ? "w-56 border-accent/30 bg-white/5"
                   : "w-0 border-transparent"
               }`}
             >
@@ -91,7 +94,7 @@ export default function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Buscar productos..."
-                className="w-full bg-transparent px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 outline-none placeholder:text-gray-400"
+                className="w-full bg-transparent px-3 py-1.5 text-sm text-gray-200 outline-none placeholder:text-gray-400"
               />
             </div>
             <button
@@ -100,7 +103,7 @@ export default function Navbar() {
                 setSearchOpen(!searchOpen);
                 if (searchOpen) setSearchQuery("");
               }}
-              className="rounded-full p-2 text-gray-500 dark:text-gray-400 transition-colors hover:bg-gray-100 dark:hover:bg-white/10 hover:text-accent dark:hover:text-white"
+              className="rounded-full p-2 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Buscar"
             >
               {searchOpen ? (
@@ -115,7 +118,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleTheme}
-            className="rounded-full p-2 text-gray-500 dark:text-gray-400 transition-colors hover:bg-gray-100 dark:hover:bg-white/10 hover:text-accent dark:hover:text-white"
+            className="rounded-full p-2 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
             aria-label={theme === "dark" ? "Modo claro" : "Modo oscuro"}
           >
             <span className="block transition-transform duration-300">
@@ -130,7 +133,7 @@ export default function Navbar() {
           {/* Cart with badge */}
           <button
             type="button"
-            className="relative rounded-full p-2 text-gray-500 dark:text-gray-400 transition-colors hover:bg-gray-100 dark:hover:bg-white/10 hover:text-accent dark:hover:text-white"
+            className="relative rounded-full p-2 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
             aria-label="Carrito de compras"
           >
             <ShoppingCart className={`h-5 w-5 ${cartBounce ? "animate-cart-bounce" : ""}`} />
@@ -144,7 +147,7 @@ export default function Navbar() {
           {/* User — desktop only */}
           <button
             type="button"
-            className="hidden sm:inline-flex rounded-full p-2 text-gray-500 dark:text-gray-400 transition-colors hover:bg-gray-100 dark:hover:bg-white/10 hover:text-accent dark:hover:text-white"
+            className="hidden sm:inline-flex rounded-full p-2 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
             aria-label="Mi cuenta"
           >
             <User className="h-5 w-5" />
@@ -154,7 +157,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="sm:hidden rounded-full p-2 text-gray-500 dark:text-gray-400 transition-colors hover:bg-gray-100 dark:hover:bg-white/10 hover:text-accent dark:hover:text-white"
+            className="sm:hidden rounded-full p-2 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
             aria-label="Menú"
           >
             <span
@@ -180,17 +183,17 @@ export default function Navbar() {
             : "max-h-0 opacity-0 -translate-y-2"
         }`}
       >
-        <ul className="flex flex-col border-t border-gray-100 dark:border-white/10 px-4 py-3 gap-1">
+        <ul className="flex flex-col border-t border-white/10 px-4 py-3 gap-1">
           {/* Mobile search */}
           <li className="mb-2">
-            <div className="flex items-center gap-2 rounded-lg bg-gray-50 dark:bg-white/5 px-3 py-2">
+            <div className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2">
               <Search className="h-4 w-4 text-gray-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Buscar productos..."
-                className="w-full bg-transparent text-sm text-gray-700 dark:text-gray-200 outline-none placeholder:text-gray-400"
+                className="w-full bg-transparent text-sm text-gray-200 outline-none placeholder:text-gray-400"
               />
             </div>
           </li>
@@ -204,8 +207,8 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className={`block rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? "bg-accent/10 text-accent"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5"
+                      ? "bg-accent/20 text-accent"
+                      : "text-gray-300 hover:bg-white/5"
                   }`}
                 >
                   {label}
@@ -216,7 +219,7 @@ export default function Navbar() {
           <li>
             <button
               type="button"
-              className="flex w-full items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5"
+              className="flex w-full items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-white/5"
             >
               <User className="h-4 w-4" />
               Mi cuenta

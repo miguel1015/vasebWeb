@@ -1,21 +1,28 @@
 import { Link } from "react-router-dom";
+import heroImage from "../../assets/imagePortada.png";
+import heroImageMobile from "../../assets/imagePortadaResponsive.jpeg";
+import heroImagePhone from "../../assets/imagePortadaPhone.png";
 
 export default function HeroSection() {
   return (
-    <section className="relative h-[280px] overflow-hidden xs:h-[340px] sm:h-[480px] lg:h-[600px]">
+    <section className="relative h-[60svh] overflow-hidden xs:h-[50svh] sm:h-[480px] lg:h-[600px]">
       {/* Background image */}
-      <img
-        src="https://images.unsplash.com/photo-1693578616322-c8abe6c7393d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="Sala de estar moderna con sofá elegante"
-        className="absolute inset-0 h-full w-full object-cover animate-fade-in"
-        style={{ animationDuration: "1.2s" }}
-      />
+      <picture>
+        <source media="(min-width: 1440px)" srcSet={heroImage} />
+        <source media="(min-width: 640px)" srcSet={heroImageMobile} />
+        <img
+          src={heroImagePhone}
+          alt="Sala de estar moderna con sofá elegante"
+          className="absolute inset-0 h-full w-full object-cover animate-fade-in sm:object-[center_45%]"
+          style={{ animationDuration: "1.2s" }}
+        />
+      </picture>
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/30 sm:bg-black/20 dark:bg-black/50 dark:sm:bg-black/40" />
 
       {/* Content */}
-      <div className="relative flex h-full flex-col items-center justify-center px-5 sm:px-6 text-center">
+      <div className="relative flex h-full flex-col items-center justify-end pb-30 sm:pb-42 px-3 sm:px-3 text-center">
         <h1 className="text-2xl font-bold leading-tight text-white drop-shadow-lg sm:text-4xl md:text-5xl lg:text-[3.25rem] animate-fade-up">
           Diseña tu hogar con estilo
         </h1>
